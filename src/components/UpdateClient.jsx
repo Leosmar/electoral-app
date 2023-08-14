@@ -1,21 +1,23 @@
 import React, { useState } from "react";
+import styles from "./styles/UpdateClient.module.css";
 import useClients from "../hooks/useClients";
-import { Link } from "react-router-dom";
-export default function AddClient() {
-  const [name, setName] = useState(null);
-  const [lastName, setLastName] = useState(null);
-  const [dni, setDni] = useState(null);
-  const [telf, setTelf] = useState(null);
-  const [dir, setDir] = useState(null);
-  const [comment, setComment] = useState(null);
-  const { registerClient } = useClients();
+
+export default function UpdateClient({ data, setHiddenUpdateClient }) {
+  const [name, setName] = useState(data?.name);
+  const [lastName, setLastName] = useState(data?.lastName);
+  const [dni, setDni] = useState(data?.dni);
+  const [telf, setTelf] = useState(data?.telf);
+  const [dir, setDir] = useState(data?.dir);
+  const [comment, setComment] = useState(data?.comment);
+  const { updateClient } = useClients();
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    registerClient({
-      endPoint: "post-client",
+    console.log(data);
+    updateClient({
+      endPoint: "put-client",
       data: {
+        id: data.id,
         name,
         lastName,
         dni,
@@ -25,10 +27,18 @@ export default function AddClient() {
       },
     });
   };
+
   return (
-    <section>
-      <Link to="/">Volver al inicio</Link>
-      <h2>Añadir usuario</h2>
+    <section className={styles.container}>
+      <div className={styles.header}>
+        <h2>Editar usuario</h2>
+        <span
+          className={styles.exit}
+          onClick={() => setHiddenUpdateClient(true)}
+        >
+          X
+        </span>
+      </div>
       <form onSubmit={onSubmit}>
         <label htmlFor="name">Nombres</label>
         <input
@@ -36,6 +46,7 @@ export default function AddClient() {
           id="name"
           required
           onChange={(e) => setName(e.target.value)}
+          value={name}
         />
 
         <label htmlFor="last-name">Apellidos</label>
@@ -44,6 +55,7 @@ export default function AddClient() {
           id="last-name"
           required
           onChange={(e) => setLastName(e.target.value)}
+          value={lastName}
         />
 
         <label htmlFor="dni">Cedula de identidad</label>
@@ -52,6 +64,7 @@ export default function AddClient() {
           id="dni"
           required
           onChange={(e) => setDni(e.target.value)}
+          value={dni}
         />
 
         <label htmlFor="telf">Numero de telefono</label>
@@ -60,20 +73,26 @@ export default function AddClient() {
           id="telf"
           required
           onChange={(e) => setTelf(e.target.value)}
+          value={telf}
         />
 
         <label htmlFor="dir">Direccion</label>
-        <textarea id="name" required onChange={(e) => setDir(e.target.value)} />
+        <textarea
+          id="name"
+          required
+          onChange={(e) => setDir(e.target.value)}
+          value={dir}
+        />
 
         <label htmlFor="comment">Observacion</label>
-        <input
-          type="text"
+        <textarea
           id="comment"
           onChange={(e) => setComment(e.target.value)}
+          value={comment || ""}
         />
 
         <br />
-        <input type="submit" value="Registrar" />
+        <input type="submit" value="Actualizar" />
       </form>
     </section>
   );

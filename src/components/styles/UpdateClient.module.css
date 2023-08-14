@@ -1,0 +1,27 @@
+.container {
+    position: absolute;
+    background-color: #303030;
+    width: 80%;
+    z-index: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.exit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    background-color: #90091d;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 5px;
+}
+
+.exit:hover {
+    cursor: pointer;
+    font-size: 1.1 rem;
+}

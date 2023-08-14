@@ -1,0 +1,28 @@
+.search {
+    background-color: #ccc;
+    color: #000;
+    width: 200px;
+    margin-right: 20px;
+}
+
+.icons {
+    min-width: 4rem;
+}
+
+.icon_left {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.icon_right {
+    font-size: 18px;
+}
+
+.icon_left:hover,
+.icon_right:hover {
+    cursor: pointer;
+}
+
+.table {
+    font-size: 14px;
+}
